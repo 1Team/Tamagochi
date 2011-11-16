@@ -1,0 +1,20 @@
+package com.novabox.tamagochi.states 
+{
+	import com.novabox.tamagochi.Tamagochi;
+	import com.novabox.tamagochi.TamagochiState;
+	
+	public class Sleeping 
+	{
+		
+		public function SleepingState(_tomagochi:Tamagochi) 
+		{
+			super(_tamagochi, "Sleeping");
+		}
+		
+		override public function UpdateFeelings() :void{
+			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_TIREDNESS);
+		}
+		
+	}
+
+}
