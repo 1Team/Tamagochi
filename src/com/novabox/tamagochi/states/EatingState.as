@@ -9,12 +9,12 @@ package com.novabox.tamagochi.states
 	public class EatingState extends TamagochiState
 	{
 		
-		public function EatingState(_tamagoshi:Tamagochi) 
+		public function EatingState(_tamagochi:Tamagochi) 
 		{
 			super(_tamagochi, "Eating");
 		}
 		
-		override public function UpdateFeeling() :void{
+		override public function UpdateFeelings() :void{
 			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_HUNGER);
 		}
 	}
