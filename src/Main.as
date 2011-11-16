@@ -91,7 +91,7 @@
 			var thirstyState:ThirstyState = new ThirstyState(tamagochi);
 			eatingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty ));
 			
-			//eatingState.AddTransition(new AutomateTransition(waitingState, !tamagochi.IsHungry));
+			eatingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsHungerOk));
 			
 			var drinkingState:DrinkingState = new DrinkingState(tamagochi);
 			thirstyState.AddTransition(new AutomateTransition(drinkingState, tamagochi.IsHelped  ));
