@@ -15,8 +15,8 @@ package com.novabox.tamagochi.states
 		}
 		
 		override public function UpdateFeelings() :void{
-			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_HUNGER);
-			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_THIRST);
+			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_HUNGER);
+			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_THIRST);
 		}
 	}
 
