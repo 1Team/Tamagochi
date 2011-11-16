@@ -6,17 +6,16 @@ package com.novabox.tamagochi.states
 	 * ...
 	 * @author Maxime
 	 */
-	public class ThirstyState extends TamagochiState
+	public class IllState extends TamagochiState
 	{
 		
-		public function ThirstyState(_tamagochi:Tamagochi) 
+		public function IllState(_tamagochi:Tamagochi) 
 		{
-			super(_tamagochi, "Thirsty");
+			super(_tamagochi, "Ill");
 		}
 		
 		override public function UpdateFeelings() :void {
 			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_ILLNESS);
-			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_THIRST);
 		}
 	}
 

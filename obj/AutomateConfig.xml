@@ -6,23 +6,23 @@
   <compiler>
     <define append="true">
       <name>CONFIG::debug</name>
-      <value>true</value>
+      <value>false</value>
     </define>
     <define append="true">
       <name>CONFIG::release</name>
-      <value>false</value>
+      <value>true</value>
     </define>
     <define append="true">
       <name>CONFIG::timeStamp</name>
       <value>'16/11/2011'</value>
     </define>
     <source-path append="true">
-      <path-element>C:\Documents and Settings\opaz\Bureau\Automate _UNCOMPLETE\Automate\src</path-element>
-      <path-element>C:\Program Files\FlashDevelop\Library\AS3\classes</path-element>
+      <path-element>C:\Users\mhersand\intelligence artificielle\Tamagochi\src</path-element>
+      <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Documents and Settings\opaz\Bureau\Automate _UNCOMPLETE\Automate\src\Main.as</path-element>
+    <path-element>C:\Users\mhersand\intelligence artificielle\Tamagochi\src\Main.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
