@@ -17,6 +17,7 @@ package com.novabox.tamagochi.states
 		override public function UpdateFeelings() : void
 		{
 			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_HUNGER);
+			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
 		}
 		
 	}
