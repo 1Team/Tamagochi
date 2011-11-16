@@ -15,7 +15,7 @@ package com.novabox.tamagochi.states
 		}
 		
 		override public function UpdateFeelings() :void {
-			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_ILLNESS);
+			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
 		}
 	}
 
