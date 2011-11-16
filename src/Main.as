@@ -80,8 +80,19 @@
 		public function SetupStates() : void
 		{
 			var waitingState:WaitingState = new WaitingState(tamagochi);
+			//waitingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsHungry));
+			
+			var hungryState:HungryState = new HungryState(tamagochi);
+			waitingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
+			
+			var eatingState:EatingState = new EatingState(tamagochi);
+			hungryState.AddTransition(new AutomateTransition(eatingState, tamagochi.IsHelped ));
+			
+			//eatingState.AddTransition(new AutomateTransition(waitingState, !tamagochi.IsHungry));
+			
+			
+			
 			tamagochi.SetCurrentState(waitingState);
-			waitingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsHungry));
 		}
 		
 		public function InitializeBars() : void

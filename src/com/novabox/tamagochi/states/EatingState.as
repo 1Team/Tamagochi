@@ -11,11 +11,12 @@ package com.novabox.tamagochi.states
 		
 		public function EatingState(_tamagoshi:Tamagochi) 
 		{
-			super(_tamagochi, "Eating");
+			super(_tamagoshi, "Eating");
 		}
 		
-		override public function UpdateFeeling() :void{
-			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_HUNGER);
+		override public function UpdateFeelings() :void{
+			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_HUNGER);
+			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_THIRST);
 		}
 	}
 
