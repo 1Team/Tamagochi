@@ -1,5 +1,6 @@
 ﻿package com.novabox.tamagochi 
 {
+	
 	/**
 	 * Automate Example
 	 * Tamagochi
@@ -9,6 +10,8 @@
 	 */
 
 	import com.novabox.automate.Automate;
+	import com.novabox.automate.AutomateTransition;
+	import com.novabox.tamagochi.states.DrinkingState;
 	import flash.accessibility.Accessibility;
 	import flash.display.DisplayObject;
 	import flash.display.Loader;
@@ -31,10 +34,10 @@
 		protected var sprite:Sprite
 		protected var facingId:String;
 		
-		public static const FEELING_HUNGER:String = "Hunger";
-		public static const FEELING_THIRST:String = "Thirst";
-		public static const FEELING_TIREDNESS:String = "Tiredness";
-		public static const FEELING_ILLNESS:String = "Illness";
+		public static const FEELING_HUNGER:String = "Hunger";  //faim
+		public static const FEELING_THIRST:String = "Thirst";	//soif
+		public static const FEELING_TIREDNESS:String = "Tiredness";	//fatigué
+		public static const FEELING_ILLNESS:String = "Illness";	//malade
 		
 		protected var hunger:Number;
 		protected var thirst:Number;
@@ -95,6 +98,7 @@
 		public function Help() : void
 		{
 			helped = true;
+			Update();
 		}
 		
 		public function IsHelped() : Boolean
