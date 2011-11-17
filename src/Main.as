@@ -80,22 +80,24 @@
 		public function SetupStates() : void
 		{
 			var waitingState:WaitingState = new WaitingState(tamagochi);
-			//waitingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsHungry));
-			
 			var hungryState:HungryState = new HungryState(tamagochi);
-			waitingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
-			
 			var eatingState:EatingState = new EatingState(tamagochi);
-			hungryState.AddTransition(new AutomateTransition(eatingState, tamagochi.IsHelped ));
-			
 			var thirstyState:ThirstyState = new ThirstyState(tamagochi);
-			eatingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty ));
-			
-			eatingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsHungerOk));
-			
 			var drinkingState:DrinkingState = new DrinkingState(tamagochi);
-			thirstyState.AddTransition(new AutomateTransition(drinkingState, tamagochi.IsHelped  ));
+			var illState:IllState = new IllState(tamagochi);
+			var recoveringState:RecoveringState = new RecoveringState(tamagochi);
+			var sleepingState:SleepingState = new SleepingState(tamagochi);
+			var tiredState:TiredState = new TiredState(tamagochi);
 			
+			waitingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
+			hungryState.AddTransition(new AutomateTransition(eatingState, tamagochi.IsHelped ));
+			eatingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty ));
+			thirstyState.AddTransition(new AutomateTransition(drinkingState, tamagochi.IsHelped));
+			drinkingState.AddTransition(new AutomateTransition(illState, tamagochi.IsIll));
+			illState.AddTransition(new AutomateTransition(recoveringState, tamagochi.IsHelped));
+			recoveringState.AddTransition(new AutomateTransition(tiredState, tamagochi.IsTired));
+			tiredState.AddTransition(new AutomateTransition(sleepingState, tamagochi.IsHelped));
+			sleepingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsTirednessOK));
 			
 			tamagochi.SetCurrentState(waitingState);
 		}

@@ -3,10 +3,10 @@ package com.novabox.tamagochi.states
 	import com.novabox.tamagochi.Tamagochi;
 	import com.novabox.tamagochi.TamagochiState;
 	
-	public class Sleeping extends TamagochiState
+	public class SleepingState extends TamagochiState
 	{
 		
-		public function SleepingState(_tomagochi:Tamagochi) 
+		public function SleepingState(_tamagochi:Tamagochi) 
 		{
 			super(_tamagochi, "Sleeping");
 		}

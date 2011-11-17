@@ -1,6 +1,7 @@
 package com.novabox.tamagochi.states 
 {
 	import com.novabox.tamagochi.TamagochiState;
+	import com.novabox.tamagochi.Tamagochi;
 	/**
 	 * ...
 	 * @author Maxime
