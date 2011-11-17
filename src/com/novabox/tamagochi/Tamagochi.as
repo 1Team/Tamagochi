@@ -10,6 +10,7 @@
 	 */
 
 	import com.novabox.automate.Automate;
+	import com.novabox.automate.AutomateState;
 	import com.novabox.automate.AutomateTransition;
 	import com.novabox.tamagochi.states.DrinkingState;
 	import flash.accessibility.Accessibility;
@@ -20,6 +21,8 @@
 	import flash.events.Event;
 	import flash.events.MouseEvent;
 	import flash.net.URLRequest;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
 	
 	 public class Tamagochi extends Automate
 	{
@@ -46,6 +49,8 @@
 		
 		protected var currentFacing:DisplayObject;
 		protected var helped:Boolean;
+		
+		protected var nameState:TextField;
 			
 				
 		public function Tamagochi() 
@@ -61,6 +66,7 @@
 			currentFacing = null;
 				
 			InitializeFeelings();
+			InitializeTextField();
 		}
 				
 		public function InitializeFeelings() : void
@@ -69,6 +75,22 @@
 			thirst = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
 			tiredness = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
 			illness = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
+		}
+		
+		public function InitializeTextField() :void
+		{
+		    nameState = new TextField();
+			nameState.mouseEnabled = false;
+			nameState.autoSize = TextFieldAutoSize.CENTER;
+			
+			sprite.addChild(nameState);
+			nameState.x = 45;
+			nameState.y = 92;
+		}
+		
+		public function setNameState(_name:String) :void
+		{
+			nameState.text = _name;
 		}
 
 		

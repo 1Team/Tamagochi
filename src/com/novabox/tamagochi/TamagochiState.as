@@ -13,6 +13,7 @@
 	 import flash.display.Loader;
 	 import flash.events.Event;
 	 import flash.net.URLRequest;
+	 
 
 	public class TamagochiState extends AutomateState
 	{
@@ -34,6 +35,8 @@
 			image.contentLoaderInfo.addEventListener(Event.COMPLETE, ImageLoaded);
 			trace(STATE_IMAGE_ROOT + _id + STATE_IMAGE_EXT);
 			image.load(new URLRequest(STATE_IMAGE_ROOT + _id + STATE_IMAGE_EXT));
+			
+			
 		}
 		
 		protected function ImageLoaded(_e:Event) : void
@@ -46,6 +49,7 @@
 			if (imageLoaded)
 			{
 				GetTamagochi().SetFacing(image);
+				GetTamagochi().setNameState(id);
 			}
 			stateTime += TimeManager.timeManager.GetFrameDeltaTime();
 			if (GetStateTime() > Tamagochi.FEELING_VARIABLE_UPDATE_DELAY)
