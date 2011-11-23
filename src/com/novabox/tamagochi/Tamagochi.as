@@ -41,11 +41,13 @@
 		public static const FEELING_THIRST:String = "Thirst";	//soif
 		public static const FEELING_TIREDNESS:String = "Tiredness";	//fatigué
 		public static const FEELING_ILLNESS:String = "Illness";	//malade
+		public static const FEELING_PLAYER:String = "Playing";	
 		
 		protected var hunger:Number;
 		protected var thirst:Number;
 		protected var tiredness: Number;
 		protected var illness:Number;
+		protected var player:Number;
 		
 		protected var currentFacing:DisplayObject;
 		protected var helped:Boolean;
@@ -59,6 +61,7 @@
 			thirst		= FEELING_VARIABLE_MIN;
 			tiredness	= FEELING_VARIABLE_MIN;
 			illness		= FEELING_VARIABLE_MIN;
+			player		= FEELING_VARIABLE_MIN;
 			
 			helped = false;
 			
@@ -75,6 +78,7 @@
 			thirst = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
 			tiredness = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
 			illness = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
+			player = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
 		}
 		
 		public function InitializeTextField() :void
@@ -168,6 +172,16 @@
 		{
 			return IsFeelingOK(FEELING_ILLNESS);			
 		}
+		
+		public function IsPlayer() : Boolean
+		{
+			return IsFeelingBad(FEELING_PLAYER);
+		}
+		
+		public function IsPlayerOK() : Boolean
+		{
+			return IsFeelingOK(FEELING_PLAYER);
+		}
 	
 		public function IsFeelingOK(_feeling:String) : Boolean
 		{
@@ -218,6 +232,9 @@
 				
 				case FEELING_TIREDNESS:
 					return tiredness;
+					
+				case FEELING_PLAYER:
+					return player;
 			}
 			
 			return -1;
@@ -241,6 +258,10 @@
 					
 				case FEELING_TIREDNESS:
 					tiredness = _value;
+					break;
+					
+				case FEELING_PLAYER:
+					player = _value;
 					break;
 			}			
 		}
