@@ -16,8 +16,6 @@ package com.novabox.tamagochi.states
 		
 		override public function UpdateFeelings() :void {
 			
-			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
-			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_THIRST);
 			
 			var choixIncrease:Number = Math.round((Math.random())*5 + 1);
 			switch (choixIncrease) {
