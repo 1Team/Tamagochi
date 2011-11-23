@@ -1,38 +1,134 @@
 package com.novabox.tamagochi.game 
 {
+	import com.novabox.tamagochi.Tamagochi;
 	import flash.display.Sprite;
 	import flash.display.SimpleButton;
 	import flash.events.MouseEvent;
+	import flash.events.Event;
 	import flash.display.Loader;
+	import flash.net.URLRequest;
 	/**
 	 * ...
 	 * @author Alex
 	 */
 	public class ShiFuMiGame 
 	{
+		protected static var ROCK:Number = 0;
+		protected static var SCISSORS:Number = 1;
+		protected static var PAPER:Number = 2;
+		
+		protected static var TAMAGOCHI:Number = 5;
+		protected static var PLAYER:Number = 6;
+		protected static var NUL:Number = 7;
+		
+		protected var sprite:Sprite;
+		
 		protected var rockBtn:SimpleButton;
 		protected var scissorsBtn:SimpleButton;
 		protected var paperBtn:SimpleButton;
 		
-		private var image:Loader;
+		protected var tamagochi:Tamagochi;
 		
-		public function ShiFuMiGame(_currentSprite:Sprite) 
+		public function ShiFuMiGame(_tamagochi:Tamagochi) 
 		{
-			image = new Loader();
-			image.load(new URLRequest("rock.png"));
+			tamagochi = _tamagochi;
+			sprite = tamagochi.GetGameSprite();
 			
-			rockBtn = new SimpleButton(image,image,image,image);
-			rockBtn.x = 100;
-			rockBtn.y = 20;
+			var rockImg:Loader = new Loader();
+			rockImg.load(new URLRequest("./images/rock.png"));
+			
+			var scissorsImg:Loader = new Loader();
+			scissorsImg.load(new URLRequest("./images/scissors.png"));
+			
+			var paperImg:Loader = new Loader();
+			paperImg.load(new URLRequest("./images/paper.png"));
+			
+			rockBtn = new SimpleButton(rockImg,rockImg,rockImg,rockImg);
+			rockBtn.x = 120;
+			rockBtn.y = 0;
 			rockBtn.addEventListener(MouseEvent.MOUSE_DOWN, rockBtnPressed);
+			
+			scissorsBtn = new SimpleButton(scissorsImg,scissorsImg,scissorsImg,scissorsImg);
+			scissorsBtn.x = 120;
+			scissorsBtn.y = 50;
+			scissorsBtn.addEventListener(MouseEvent.MOUSE_DOWN, scissorsBtnPressed);
+			
+			paperBtn = new SimpleButton(paperImg,paperImg,paperImg,paperImg);
+			paperBtn.x = 130;
+			paperBtn.y = 140;
+			paperBtn.addEventListener(MouseEvent.MOUSE_DOWN, paperBtnPressed);
 		
-			
-			
+			sprite.addChild(rockBtn);
+			sprite.addChild(scissorsBtn);
+			sprite.addChild(paperBtn);
 		}
 		
-		public function rockBtnPressed()
+		protected function rockBtnPressed(_event:Event) :void
 		{
-			trace("click");
+			trace("click rock");
+			play(ROCK);
+		}
+		
+		protected function scissorsBtnPressed(_event:Event) :void
+		{
+			trace("click scissors");
+			play(SCISSORS);
+		}
+		
+		protected function paperBtnPressed(_event:Event) :void
+		{
+			trace("click paper");
+			play(PAPER);
+		}
+		
+		protected function play(_value:Number) :void
+		{
+			var choixTamagochi:Number = Math.round(Math.random() * 2);
+			
+			var winner:Number;
+			
+			switch(choixTamagochi)
+			{
+				case ROCK :
+					if (_value == ROCK)
+						winner = NUL;
+					else if (_value == SCISSORS)
+						winner = TAMAGOCHI;
+					else if (_value == PAPER)
+						winner = PLAYER;
+					break;
+				case SCISSORS :
+					if (_value == ROCK)
+						winner = PLAYER;
+					else if (_value == SCISSORS)
+						winner = NUL;
+					else if (_value == PAPER)
+						winner = TAMAGOCHI;
+					break;
+				case PAPER :
+					if (_value == ROCK)
+						winner = TAMAGOCHI;
+					else if (_value == SCISSORS)
+						winner = PLAYER;
+					else if (_value == PAPER)
+						winner = NUL;
+					break;
+			}
+			trace(_value + " " + choixTamagochi);
+			trace(winner);
+			if(winner != NUL)
+				close();
+		}
+		
+		protected function close() :void
+		{
+			sprite.removeChild(rockBtn);
+			sprite.removeChild(scissorsBtn);
+			sprite.removeChild(paperBtn);
+			while (!tamagochi.IsBoringOK())
+			{
+				tamagochi.DecreaseFeeling(Tamagochi.FEELING_BORING);
+			}
 		}
 	}
 

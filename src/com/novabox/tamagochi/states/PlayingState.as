@@ -9,16 +9,24 @@ package com.novabox.tamagochi.states
 	 */
 	public class PlayingState extends TamagochiState
 	{
+		protected var isPlaying:Boolean;
 		
 		public function PlayingState(_tamagochi:Tamagochi) 
 		{
 			super(_tamagochi, "Playing");
-			ShiFuMiGame game = new ShiFuMiGame(_tamagochi.GetSprite());
+			isPlaying = false;
+			
 		}
 		
 		override public function UpdateFeelings() :void {
-			
-			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_BORING);
+			if (!isPlaying)
+			{
+				var game:ShiFuMiGame = new ShiFuMiGame(GetTamagochi());
+				isPlaying = true;
+			}
+			//GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_BORING);
+			if (GetTamagochi().IsBoringOK())
+				isPlaying = false;
 			
 			var choixIncrease:Number = Math.round((Math.random())*4 + 1);
 			switch (choixIncrease) {
