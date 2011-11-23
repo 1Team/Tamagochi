@@ -7,6 +7,11 @@ package com.novabox.tamagochi.game
 	import flash.events.Event;
 	import flash.display.Loader;
 	import flash.net.URLRequest;
+	import flash.text.TextField;
+	import flash.text.TextFieldAutoSize;
+	import flash.utils.setInterval;
+	import flash.utils.Timer;
+	import flash.events.TimerEvent;
 	/**
 	 * ...
 	 * @author Alex
@@ -29,10 +34,22 @@ package com.novabox.tamagochi.game
 		
 		protected var tamagochi:Tamagochi;
 		
+		protected var winnerText:TextField;
+		
+		protected var Img:Loader;
+		
 		public function ShiFuMiGame(_tamagochi:Tamagochi) 
 		{
 			tamagochi = _tamagochi;
 			sprite = tamagochi.GetGameSprite();
+			
+			winnerText = new TextField();
+			winnerText.mouseEnabled = false;
+			winnerText.autoSize = TextFieldAutoSize.CENTER;
+			
+			sprite.addChild(winnerText);
+			winnerText.x = 90;
+			winnerText.y = 160;
 			
 			var rockImg:Loader = new Loader();
 			rockImg.load(new URLRequest("./images/rock.png"));
@@ -116,8 +133,26 @@ package com.novabox.tamagochi.game
 			}
 			trace(_value + " " + choixTamagochi);
 			trace(winner);
-			if(winner != NUL)
+			if (winner != NUL)
+			{
+				Img = new Loader();
+				if (winner == PLAYER)
+				{
+					winnerText.text = "Tu as gagné";
+					Img.load(new URLRequest("./images/Lost.png"));
+				}
+				else if (winner == TAMAGOCHI)
+				{
+					winnerText.text = "J'ai gagné";
+					Img.load(new URLRequest("./images/Won.png"));
+				}
+				Img.x = 0;
+				Img.y = 0;
+				sprite.addChild(Img);
 				close();
+			}
+			else
+				winnerText.text = "Match nul";
 		}
 		
 		protected function close() :void
@@ -125,10 +160,25 @@ package com.novabox.tamagochi.game
 			sprite.removeChild(rockBtn);
 			sprite.removeChild(scissorsBtn);
 			sprite.removeChild(paperBtn);
+			
+			var timerSynchro:Timer = new Timer( 1000, 1) ;
+            timerSynchro.addEventListener( TimerEvent.TIMER, hideText ) ;
+            timerSynchro.start( ) ;
+			
+			//sprite.removeChild(winnerText);
 			while (!tamagochi.IsBoringOK())
 			{
 				tamagochi.DecreaseFeeling(Tamagochi.FEELING_BORING);
 			}
+			
+			
+		}
+		
+		
+		protected function hideText (_event:Event) :void
+		{
+			sprite.removeChild(winnerText);
+			sprite.removeChild(Img);
 		}
 	}
 
