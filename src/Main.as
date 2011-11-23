@@ -105,6 +105,7 @@
 			illState.AddTransition(new AutomateTransition(recoveringState, tamagochi.IsHelped));
 			
 			recoveringState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsIllnessOK));
+			//recoveringState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsHelped));
 			
 			tiredState.AddTransition(new AutomateTransition(sleepingState, tamagochi.IsHelped));
 
@@ -142,6 +143,7 @@
 			UpdateBar(thirstBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_THIRST), 		0xAA0000);
 			UpdateBar(tirednessBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_TIREDNESS),	0xAAAAAA);
 			UpdateBar(illnessBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_ILLNESS),		0x00AA00);
+			UpdateBar(playingBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_PLAYER),		0x0000AA);
 		}
 		
 		public function UpdateBar(_bar:Sprite, _value:Number, _color:Number) : void
