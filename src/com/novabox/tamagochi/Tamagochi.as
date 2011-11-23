@@ -196,7 +196,7 @@
 		public function IncreaseFeeling(_feeling:String) : void
 		{
 			var feelingValue:Number = GetFeelingValue(_feeling);
-			feelingValue += FEELING_VARIABLE_UPDATE_VALUE;
+			feelingValue += (Math.round( (Math.random())*(10-1) +1  ))/100;
 			if (feelingValue > FEELING_VARIABLE_MAX)
 			{
 				feelingValue = FEELING_VARIABLE_MAX;
