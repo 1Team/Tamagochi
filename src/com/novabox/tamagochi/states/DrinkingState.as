@@ -19,7 +19,7 @@ package com.novabox.tamagochi.states
 		{
 			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_THIRST);
 			
-			var choixIncrease:Number = Math.round((Math.random())*4 + 1);
+			var choixIncrease:Number = Math.round((Math.random())*5 + 1);
 			switch (choixIncrease) {
 				case 1: 
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_HUNGER);
@@ -29,6 +29,9 @@ package com.novabox.tamagochi.states
 					break;
 				case 3:
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
+					break;
+				case 4:
+					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_BORING);
 					break;
 				default:
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
