@@ -34,7 +34,8 @@
 		
 		public static var FEELING_VARIABLE_UPDATE_DELAY:Number = 500;
 		
-		protected var sprite:Sprite
+		protected var sprite:Sprite;
+		protected var gameSprite:Sprite;
 		protected var facingId:String;
 		
 		public static const FEELING_HUNGER:String = "Hunger";  //faim
@@ -66,6 +67,7 @@
 			helped = false;
 			
 			sprite = new Sprite();
+			gameSprite = new Sprite();
 			currentFacing = null;
 				
 			InitializeFeelings();
@@ -101,6 +103,11 @@
 		public function GetSprite() : Sprite
 		{
 			return sprite;
+		}
+		
+		public function GetGameSprite() : Sprite
+		{
+			return gameSprite;
 		}
 		
 		override public function Update() : void

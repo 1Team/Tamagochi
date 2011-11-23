@@ -63,10 +63,9 @@
 			tamagochi = new Tamagochi();
 			SetupStates()
 			
-			
 			addChild(tamagochi.GetSprite());
+			addChild(tamagochi.GetGameSprite());
 			tamagochi.GetSprite().addEventListener(MouseEvent.CLICK, OnClick);
-			
 			
 			addEventListener(Event.ENTER_FRAME, Update);
 			
@@ -89,6 +88,7 @@
 			var sleepingState:SleepingState = new SleepingState(tamagochi);
 			var tiredState:TiredState = new TiredState(tamagochi);
 			var boringState:BoringState = new BoringState(tamagochi);
+			var playingState:PlayingState = new PlayingState(tamagochi);
 			
 			waitingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
 			waitingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty ));
@@ -113,7 +113,9 @@
 
 			sleepingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsTirednessOK));
 			
-			boringState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsBoringOK));
+			boringState.AddTransition(new AutomateTransition(playingState, tamagochi.IsHelped));
+			
+			playingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsBoringOK));
 			
 			tamagochi.SetCurrentState(waitingState);
 		}
