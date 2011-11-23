@@ -96,30 +96,18 @@
 			
 			hungryState.AddTransition(new AutomateTransition(eatingState, tamagochi.IsHelped ));
 			
-			/*eatingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty ));
-			eatingState.AddTransition(new AutomateTransition(illState, tamagochi.IsIll ));
-			eatingState.AddTransition(new AutomateTransition(tiredState, tamagochi.IsTired ));*/
 			eatingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsHungerOk));
 			
 			thirstyState.AddTransition(new AutomateTransition(drinkingState, tamagochi.IsHelped));
 			
-			/*drinkingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
-			drinkingState.AddTransition(new AutomateTransition(illState, tamagochi.IsIll ));
-			drinkingState.AddTransition(new AutomateTransition(tiredState, tamagochi.IsTired ));*/
 			drinkingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsThirstOK));
 		    			
 			illState.AddTransition(new AutomateTransition(recoveringState, tamagochi.IsHelped));
 			
-			/*recoveringState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty));
-			recoveringState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
-			recoveringState.AddTransition(new AutomateTransition(tiredState, tamagochi.IsTired ));*/
 			recoveringState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsIllnessOK));
 			
 			tiredState.AddTransition(new AutomateTransition(sleepingState, tamagochi.IsHelped));
-			
-			/*sleepingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty));
-			sleepingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
-			sleepingState.AddTransition(new AutomateTransition(illState, tamagochi.IsIll ));*/
+
 			sleepingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsTirednessOK));
 			
 			tamagochi.SetCurrentState(waitingState);
