@@ -2,21 +2,25 @@ package com.novabox.tamagochi.states
 {
 	import com.novabox.tamagochi.Tamagochi;
 	import com.novabox.tamagochi.TamagochiState;
+	import com.novabox.tamagochi.game.ShiFuMiGame;
 	/**
 	 * ...
-	 * @author Brian Teyssier
+	 * @author alex
 	 */
-	public class BoringState extends TamagochiState
+	public class PlayingState extends TamagochiState
 	{
 		
-		public function BoringState(_tamagochi:Tamagochi) 
+		public function PlayingState(_tamagochi:Tamagochi) 
 		{
-			super(_tamagochi, "Boring");
+			super(_tamagochi, "Playing");
+			ShiFuMiGame game = new ShiFuMiGame(_tamagochi.GetSprite());
 		}
 		
 		override public function UpdateFeelings() :void {
 			
-			var choixIncrease:Number = Math.round((Math.random())*6 + 1);
+			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_BORING);
+			
+			var choixIncrease:Number = Math.round((Math.random())*4 + 1);
 			switch (choixIncrease) {
 				case 1:
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_THIRST);
@@ -26,12 +30,6 @@ package com.novabox.tamagochi.states
 					break;
 				case 3:
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
-					break;
-				case 4 :
-					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_BORING);
-					break;
-				case 5:
-					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_HUNGER);
 					break;
 			}
 		}
