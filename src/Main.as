@@ -37,7 +37,7 @@
 		protected var thirstBar:Sprite;
 		protected var tirednessBar:Sprite;
 		protected var illnessBar:Sprite;
-		protected var playingBar:Sprite;
+		protected var boringBar:Sprite;
 		
 		
 		public function Main():void 
@@ -88,11 +88,13 @@
 			var recoveringState:RecoveringState = new RecoveringState(tamagochi);
 			var sleepingState:SleepingState = new SleepingState(tamagochi);
 			var tiredState:TiredState = new TiredState(tamagochi);
+			var boringState:BoringState = new BoringState(tamagochi);
 			
 			waitingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
 			waitingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty ));
 			waitingState.AddTransition(new AutomateTransition(illState, tamagochi.IsIll ));
 			waitingState.AddTransition(new AutomateTransition(tiredState, tamagochi.IsTired ));
+			waitingState.AddTransition(new AutomateTransition(boringState, tamagochi.IsBoring ));
 			
 			hungryState.AddTransition(new AutomateTransition(eatingState, tamagochi.IsHelped ));
 			
@@ -110,6 +112,8 @@
 			tiredState.AddTransition(new AutomateTransition(sleepingState, tamagochi.IsHelped));
 
 			sleepingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsTirednessOK));
+			
+			boringState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsBoringOK));
 			
 			tamagochi.SetCurrentState(waitingState);
 		}
@@ -132,9 +136,9 @@
 			addChild(illnessBar);
 			illnessBar.y = tirednessBar.y + BAR_HEIGHT;			
 			
-			playingBar= new Sprite();
-			addChild(playingBar);
-			playingBar.y = illnessBar.y + BAR_HEIGHT;			
+			boringBar = new Sprite();
+			addChild(boringBar);
+			boringBar.y = illnessBar.y + BAR_HEIGHT;			
 		}
 		
 		public function UpdateBars() : void
@@ -143,7 +147,7 @@
 			UpdateBar(thirstBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_THIRST), 		0xAA0000);
 			UpdateBar(tirednessBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_TIREDNESS),	0xAAAAAA);
 			UpdateBar(illnessBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_ILLNESS),		0x00AA00);
-			UpdateBar(playingBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_PLAYER),		0x0000AA);
+			UpdateBar(boringBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_BORING),		0x0000AA);
 		}
 		
 		public function UpdateBar(_bar:Sprite, _value:Number, _color:Number) : void

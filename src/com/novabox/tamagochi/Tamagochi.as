@@ -41,13 +41,13 @@
 		public static const FEELING_THIRST:String = "Thirst";	//soif
 		public static const FEELING_TIREDNESS:String = "Tiredness";	//fatigué
 		public static const FEELING_ILLNESS:String = "Illness";	//malade
-		public static const FEELING_PLAYER:String = "Playing";	
+		public static const FEELING_BORING:String = "Boring";	
 		
 		protected var hunger:Number;
 		protected var thirst:Number;
 		protected var tiredness: Number;
 		protected var illness:Number;
-		protected var player:Number;
+		protected var boring:Number;
 		
 		protected var currentFacing:DisplayObject;
 		protected var helped:Boolean;
@@ -61,7 +61,7 @@
 			thirst		= FEELING_VARIABLE_MIN;
 			tiredness	= FEELING_VARIABLE_MIN;
 			illness		= FEELING_VARIABLE_MIN;
-			player		= FEELING_VARIABLE_MIN;
+			boring		= FEELING_VARIABLE_MIN;
 			
 			helped = false;
 			
@@ -78,7 +78,7 @@
 			thirst = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
 			tiredness = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
 			illness = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
-			player = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
+			boring = Math.random() * (FEELING_VARIABLE_MAX - FEELING_VARIABLE_MIN) + FEELING_VARIABLE_MIN;
 		}
 		
 		public function InitializeTextField() :void
@@ -173,14 +173,14 @@
 			return IsFeelingOK(FEELING_ILLNESS);			
 		}
 		
-		public function IsPlayer() : Boolean
+		public function IsBoring() : Boolean
 		{
-			return IsFeelingBad(FEELING_PLAYER);
+			return IsFeelingBad(FEELING_BORING);
 		}
 		
-		public function IsPlayerOK() : Boolean
+		public function IsBoringOK() : Boolean
 		{
-			return IsFeelingOK(FEELING_PLAYER);
+			return IsFeelingOK(FEELING_BORING);
 		}
 	
 		public function IsFeelingOK(_feeling:String) : Boolean
@@ -233,8 +233,8 @@
 				case FEELING_TIREDNESS:
 					return tiredness;
 					
-				case FEELING_PLAYER:
-					return player;
+				case FEELING_BORING:
+					return boring;
 			}
 			
 			return -1;
@@ -260,8 +260,8 @@
 					tiredness = _value;
 					break;
 					
-				case FEELING_PLAYER:
-					player = _value;
+				case FEELING_BORING:
+					boring = _value;
 					break;
 			}			
 		}
