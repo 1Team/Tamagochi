@@ -1,20 +1,22 @@
 package com.novabox.tamagochi.states 
 {
+	import com.novabox.tamagochi.Tamagochi;
+	import com.novabox.tamagochi.TamagochiState;
 	/**
 	 * ...
 	 * @author Brian Teyssier
 	 */
-	public class PlayerState extends TamagochiState
+	public class BoringState extends TamagochiState
 	{
 		
-		public function PlayerState(_tamagochi:Tamagochi) 
+		public function BoringState(_tamagochi:Tamagochi) 
 		{
-			super(_tamagochi, "Playing");
+			super(_tamagochi, "Boring");
 		}
 		
 		override public function UpdateFeelings() :void {
 			
-			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_PLAYER);
+			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_BORING);
 			
 			var choixIncrease:Number = Math.round((Math.random())*4 + 1);
 			switch (choixIncrease) {
