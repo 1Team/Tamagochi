@@ -27,6 +27,11 @@
 			currentState.Enter();
 		}
 		
+		public function GetCurrentState() :AutomateState
+		{
+			return currentState;
+		}
+		
 		
 		public function Update() : void
 		{

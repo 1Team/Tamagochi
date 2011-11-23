@@ -135,7 +135,7 @@
 		
 		public function IsHungry() : Boolean
 		{
-			return IsFeelingBad(FEELING_HUNGER);
+			return (IsFeelingBad(FEELING_HUNGER) && isFeelingMostImportant(FEELING_HUNGER));
 		}
 		
 		public function IsHungerOk() : Boolean
@@ -145,7 +145,7 @@
 		
 		public function IsThirsty() : Boolean
 		{
-			return IsFeelingBad(FEELING_THIRST);
+			return (IsFeelingBad(FEELING_THIRST) && isFeelingMostImportant(FEELING_THIRST));
 		}
 
 		public function IsThirstOK() : Boolean
@@ -155,7 +155,7 @@
 
 		public function IsTired() : Boolean
 		{
-			return IsFeelingBad(FEELING_TIREDNESS);
+			return (IsFeelingBad(FEELING_TIREDNESS) && isFeelingMostImportant(FEELING_TIREDNESS));
 		}
 		
 		public function IsTirednessOK() : Boolean
@@ -165,7 +165,7 @@
 
 		public function IsIll() : Boolean
 		{
-			return IsFeelingBad(FEELING_ILLNESS);			
+			return (IsFeelingBad(FEELING_ILLNESS) && isFeelingMostImportant(FEELING_ILLNESS));			
 		}
 
 		public function IsIllnessOK() : Boolean
@@ -175,7 +175,7 @@
 		
 		public function IsBoring() : Boolean
 		{
-			return IsFeelingBad(FEELING_BORING);
+			return (IsFeelingBad(FEELING_BORING) && isFeelingMostImportant(FEELING_BORING));
 		}
 		
 		public function IsBoringOK() : Boolean
@@ -192,7 +192,41 @@
 		{
 			return (GetFeelingValue(_feeling) > FEELING_VARIABLE_ALERT_VALUE);
 		}
-
+		
+		public function feelingMostImportant () :String
+		{
+			var feeling:Array = new Array();
+			
+			feeling.push("Hunger", hunger);
+			
+			if ( feeling[1] < thirst) {
+				feeling[0] = "Thirst";
+				feeling[1] = thirst;
+			}
+			
+			if ( feeling[1] < tiredness) {
+				feeling[0] = "Tiredness";
+				feeling[1] = tiredness;
+			}
+			
+			if ( feeling[1] < illness) {
+				feeling[0] = "Illness";
+				feeling[1] = illness;
+			}
+			
+			if ( feeling[1] < boring) {
+				feeling[0] = "Boring";
+				feeling[1] = boring;
+			}
+			
+			return feeling[0];
+		}
+		
+		public function isFeelingMostImportant(_feeling:String) :Boolean
+		{
+			return (_feeling == feelingMostImportant() );
+		}
+		
 		public function IncreaseFeeling(_feeling:String) : void
 		{
 			var feelingValue:Number = GetFeelingValue(_feeling);
