@@ -20,20 +20,12 @@
     </define>
     <verbose-stacktraces>true</verbose-stacktraces>
     <source-path append="true">
-<<<<<<< HEAD
-      <path-element>C:\Users\mhersand\intelligence artificielle\Tamagochi\src</path-element>
-=======
       <path-element>C:\Users\Alex\Documents\Tamagochi\src</path-element>
->>>>>>> b7d646577ea23ba763f455720a0a1e8c617432ad
       <path-element>C:\Program Files (x86)\FlashDevelop\Library\AS3\classes</path-element>
     </source-path>
   </compiler>
   <file-specs>
-<<<<<<< HEAD
-    <path-element>C:\Users\mhersand\intelligence artificielle\Tamagochi\src\Main.as</path-element>
-=======
     <path-element>C:\Users\Alex\Documents\Tamagochi\src\Main.as</path-element>
->>>>>>> b7d646577ea23ba763f455720a0a1e8c617432ad
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>30</default-frame-rate>
