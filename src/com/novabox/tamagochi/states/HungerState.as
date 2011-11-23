@@ -1,21 +1,20 @@
 package com.novabox.tamagochi.states 
 {
-	import com.novabox.tamagochi.Tamagochi;
-	import com.novabox.tamagochi.TamagochiState;
 	/**
 	 * ...
-	 * @author Maxime
+	 * @author Brian Teyssier
 	 */
-	public class IllState extends TamagochiState
+	public class HungerState 
 	{
 		
-		public function IllState(_tamagochi:Tamagochi) 
+		public function HungerState() 
 		{
-			super(_tamagochi, "Ill");
+			super(_tamagochi, "Hungry");
 		}
 		
-		override public function UpdateFeelings() :void {
-			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
+		override public function UpdateFeelings() : void
+		{
+			GetTamagochi().DecreaseFeeling(Tamagochi.FEELING_HUNGER);
 			
 			var choixIncrease:Number = Math.round((Math.random())*5 + 1);
 			switch (choixIncrease) {
