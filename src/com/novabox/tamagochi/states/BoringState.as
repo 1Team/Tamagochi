@@ -32,6 +32,9 @@ package com.novabox.tamagochi.states
 				case 4:
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
 					break;
+				case 4:
+					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_HUNGER);
+					break;
 			}
 		}
 		
