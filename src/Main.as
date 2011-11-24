@@ -38,6 +38,7 @@
 		protected var tirednessBar:Sprite;
 		protected var illnessBar:Sprite;
 		protected var boringBar:Sprite;
+		protected var lifeBar:Sprite;
 		
 		
 		public function Main():void 
@@ -89,7 +90,9 @@
 			var tiredState:TiredState = new TiredState(tamagochi);
 			var boringState:BoringState = new BoringState(tamagochi);
 			var playingState:PlayingState = new PlayingState(tamagochi);
+			var deadState:DeadState = new DeadState(tamagochi);
 			
+			waitingState.AddTransition(new AutomateTransition(deadState, tamagochi.IsDead));
 			waitingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
 			waitingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty ));
 			waitingState.AddTransition(new AutomateTransition(illState, tamagochi.IsIll ));
@@ -105,6 +108,7 @@
 			drinkingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsThirstOK));
 		    			
 			illState.AddTransition(new AutomateTransition(recoveringState, tamagochi.IsHelped));
+			illState.AddTransition(new AutomateTransition(deadState, tamagochi.IsDead));
 			
 			recoveringState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsIllnessOK));
 			//recoveringState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsHelped));
@@ -140,7 +144,11 @@
 			
 			boringBar = new Sprite();
 			addChild(boringBar);
-			boringBar.y = illnessBar.y + BAR_HEIGHT;			
+			boringBar.y = illnessBar.y + BAR_HEIGHT;	
+			
+			lifeBar = new Sprite ();
+			addChild(lifeBar);
+			lifeBar.y = boringBar.y + 3*BAR_HEIGHT;
 		}
 		
 		public function UpdateBars() : void
@@ -150,6 +158,7 @@
 			UpdateBar(tirednessBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_TIREDNESS),	0xAAAAAA);
 			UpdateBar(illnessBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_ILLNESS),		0x00AA00);
 			UpdateBar(boringBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_BORING),		0x0000AA);
+			UpdateBar(lifeBar, tamagochi.GetFeelingValue(Tamagochi.LIFE),		0x660000);
 		}
 		
 		public function UpdateBar(_bar:Sprite, _value:Number, _color:Number) : void

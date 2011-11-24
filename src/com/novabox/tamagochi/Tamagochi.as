@@ -43,12 +43,14 @@
 		public static const FEELING_TIREDNESS:String = "Tiredness";	//fatigué
 		public static const FEELING_ILLNESS:String = "Illness";	//malade
 		public static const FEELING_BORING:String = "Boring";	
+		public static const LIFE:String = "Life";
 		
 		protected var hunger:Number;
 		protected var thirst:Number;
 		protected var tiredness: Number;
 		protected var illness:Number;
 		protected var boring:Number;
+		protected var life:Number;
 		
 		protected var currentFacing:DisplayObject;
 		protected var helped:Boolean;
@@ -63,6 +65,7 @@
 			tiredness	= FEELING_VARIABLE_MIN;
 			illness		= FEELING_VARIABLE_MIN;
 			boring		= FEELING_VARIABLE_MIN;
+			life = FEELING_VARIABLE_MAX;
 			
 			helped = false;
 			
@@ -150,6 +153,11 @@
 			return IsFeelingOK(FEELING_HUNGER);
 		}
 		
+		public function IsHungerMax() : Boolean
+		{
+			return (hunger == FEELING_VARIABLE_MAX);
+		}
+		
 		public function IsThirsty() : Boolean
 		{
 			return (IsFeelingBad(FEELING_THIRST) && isFeelingMostImportant(FEELING_THIRST));
@@ -159,7 +167,12 @@
 		{
 			return IsFeelingOK(FEELING_THIRST);
 		}
-
+		
+		public function IsThirstMax() : Boolean
+		{
+			return (thirst == FEELING_VARIABLE_MAX);
+		}
+		
 		public function IsTired() : Boolean
 		{
 			return (IsFeelingBad(FEELING_TIREDNESS) && isFeelingMostImportant(FEELING_TIREDNESS));
@@ -180,6 +193,11 @@
 			return IsFeelingOK(FEELING_ILLNESS);			
 		}
 		
+		public function IsIllnessMax() :Boolean
+		{
+			return (illness == FEELING_VARIABLE_MAX);
+		}
+		
 		public function IsBoring() : Boolean
 		{
 			return (IsFeelingBad(FEELING_BORING) && isFeelingMostImportant(FEELING_BORING));
@@ -198,6 +216,11 @@
 		public function IsFeelingBad(_feeling:String) : Boolean
 		{
 			return (GetFeelingValue(_feeling) > FEELING_VARIABLE_ALERT_VALUE);
+		}
+		
+		public function IsDead() :Boolean
+		{
+			return ( life == 0 );
 		}
 		
 		public function feelingMostImportant () :String
@@ -277,6 +300,8 @@
 					
 				case FEELING_BORING:
 					return boring;
+				case LIFE:
+					return life;
 			}
 			
 			return -1;
@@ -304,6 +329,10 @@
 					
 				case FEELING_BORING:
 					boring = _value;
+					break;
+					
+				case LIFE:
+					life = _value;
 					break;
 			}			
 		}

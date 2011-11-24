@@ -17,6 +17,11 @@ package com.novabox.tamagochi.states
 		override public function UpdateFeelings() :void {
 			GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_ILLNESS);
 			
+			if (GetTamagochi().IsIllnessMax())
+			{
+				GetTamagochi().DecreaseFeeling(Tamagochi.LIFE);
+			}
+			
 			var choixIncrease:Number = Math.round((Math.random())*6 + 1);
 			switch (choixIncrease) {
 				case 1: 
