@@ -38,6 +38,8 @@ package com.novabox.tamagochi.game
 		
 		protected var Img:Loader;
 		
+		protected var isPlaying:Boolean;
+		
 		public function ShiFuMiGame(_tamagochi:Tamagochi) 
 		{
 			tamagochi = _tamagochi;
@@ -75,9 +77,23 @@ package com.novabox.tamagochi.game
 			paperBtn.y = 140;
 			paperBtn.addEventListener(MouseEvent.MOUSE_DOWN, paperBtnPressed);
 		
+			//lanch();
+		}
+		public function IsPlaying() :Boolean
+		{
+			return isPlaying;
+		}
+		
+		public function launch() :void
+		{
+			winnerText.text = "";
+			
 			sprite.addChild(rockBtn);
 			sprite.addChild(scissorsBtn);
 			sprite.addChild(paperBtn);
+			sprite.addChild(winnerText);
+			
+			isPlaying = true;
 		}
 		
 		protected function rockBtnPressed(_event:Event) :void
@@ -170,7 +186,7 @@ package com.novabox.tamagochi.game
 			{
 				tamagochi.DecreaseFeeling(Tamagochi.FEELING_BORING);
 			}
-			
+			isPlaying = false;
 			
 		}
 		
