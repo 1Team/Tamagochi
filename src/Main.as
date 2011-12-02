@@ -23,11 +23,11 @@
 	import com.novabox.tamagochi.*;
 	import com.novabox.tamagochi.states.*;
 
-	[SWF(backgroundColor = "#FFFFFF", frameRate = "60", width = "200", height = "190")]
+	[SWF(backgroundColor = "#FFFFFF", frameRate = "60", width = "300", height = "210")]
 
 	public class Main extends Sprite 
 	{
-		public static const BAR_ORIGIN_Y:Number = 110;
+		public static const BAR_ORIGIN_Y:Number = 130;
 		public static const BAR_HEIGHT:Number = 10;
 		public static const BAR_WIDTH:Number = 120;
 		
@@ -62,7 +62,7 @@
 		{
 			
 			tamagochi = new Tamagochi();
-			SetupStates()
+			SetupStates();
 			
 			addChild(tamagochi.GetSprite());
 			addChild(tamagochi.GetGameSprite());
@@ -91,7 +91,9 @@
 			var boringState:BoringState = new BoringState(tamagochi);
 			var playingState:PlayingState = new PlayingState(tamagochi);
 			var deadState:DeadState = new DeadState(tamagochi);
+			var unamedState:NamingState = new NamingState(tamagochi);
 			
+			waitingState.AddTransition(new AutomateTransition(unamedState, tamagochi.IsUnNamed));
 			waitingState.AddTransition(new AutomateTransition(deadState, tamagochi.IsDead));
 			waitingState.AddTransition(new AutomateTransition(hungryState, tamagochi.IsHungry ));
 			waitingState.AddTransition(new AutomateTransition(thirstyState, tamagochi.IsThirsty ));
@@ -120,6 +122,8 @@
 			boringState.AddTransition(new AutomateTransition(playingState, tamagochi.IsHelped));
 			
 			playingState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsBoringOK));
+			
+			unamedState.AddTransition(new AutomateTransition(waitingState, tamagochi.IsNamed));
 			
 			tamagochi.SetCurrentState(waitingState);
 		}

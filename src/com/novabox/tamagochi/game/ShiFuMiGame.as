@@ -50,7 +50,7 @@ package com.novabox.tamagochi.game
 			winnerText.autoSize = TextFieldAutoSize.CENTER;
 			
 			sprite.addChild(winnerText);
-			winnerText.x = 90;
+			winnerText.x = 50;
 			winnerText.y = 160;
 			
 			var rockImg:Loader = new Loader();

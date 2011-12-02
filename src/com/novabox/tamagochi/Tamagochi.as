@@ -28,6 +28,8 @@
 	{
 		public static var FEELING_VARIABLE_MIN:Number = 0;
 		public static var FEELING_VARIABLE_MAX:Number = 1;
+		public static var NAME_DEFAULT:String = "Unamed";
+		public static var IS_NAME:Boolean;
 		
 		public static var FEELING_VARIABLE_UPDATE_VALUE:Number = 0.1;
 		public static var FEELING_VARIABLE_ALERT_VALUE:Number = 0.5;
@@ -44,6 +46,7 @@
 		public static const FEELING_ILLNESS:String = "Illness";	//malade
 		public static const FEELING_BORING:String = "Boring";	
 		public static const LIFE:String = "Life";
+		public static const NAME:String = "Name";
 		
 		protected var hunger:Number;
 		protected var thirst:Number;
@@ -51,12 +54,14 @@
 		protected var illness:Number;
 		protected var boring:Number;
 		protected var life:Number;
+		protected var name:String;
 		
 		protected var currentFacing:DisplayObject;
 		protected var helped:Boolean;
 		
 		protected var nameState:TextField;
-			
+		protected var nameTamagochi:TextField;
+		
 				
 		public function Tamagochi() 
 		{
@@ -65,16 +70,21 @@
 			tiredness	= FEELING_VARIABLE_MIN;
 			illness		= FEELING_VARIABLE_MIN;
 			boring		= FEELING_VARIABLE_MIN;
-			life = FEELING_VARIABLE_MAX;
+			life 		= FEELING_VARIABLE_MAX;
+			name		= NAME_DEFAULT;
+			
+			IS_NAME = false;
 			
 			helped = false;
 			
 			sprite = new Sprite();
 			gameSprite = new Sprite();
 			currentFacing = null;
-				
+			
 			InitializeFeelings();
 			InitializeTextField();
+			
+			setNameTamagochi(name);
 		}
 				
 		public function InitializeFeelings() : void
@@ -92,16 +102,33 @@
 			nameState.mouseEnabled = false;
 			nameState.autoSize = TextFieldAutoSize.CENTER;
 			
+			nameTamagochi = new TextField();
+			nameTamagochi.mouseEnabled = false;
+			nameTamagochi.autoSize = TextFieldAutoSize.CENTER;
+			
 			sprite.addChild(nameState);
 			nameState.x = 45;
-			nameState.y = 92;
+			nameState.y = 112;
+			
+			sprite.addChild(nameTamagochi);
+			nameTamagochi.x = 45;
+			nameTamagochi.y = 92;
 		}
 		
 		public function setNameState(_name:String) :void
 		{
 			nameState.text = _name;
 		}
-
+	
+		public function getNameTamagochi() :TextField
+		{
+			return nameTamagochi;
+		}
+		
+		public function setNameTamagochi(_name:String) :void
+		{
+			nameTamagochi.text = _name;
+		}
 		
 		public function GetSprite() : Sprite
 		{
@@ -142,6 +169,13 @@
 			return helped;
 		}
 		
+		public function IsUnNamed() :Boolean{
+			return (nameTamagochi.text == "Unamed");
+		}
+		
+		public function IsNamed() :Boolean {
+			return (nameTamagochi.text != "Unamed");
+		}
 		
 		public function IsHungry() : Boolean
 		{
