@@ -17,19 +17,24 @@
 	import flash.events.MouseEvent;
 	import flash.geom.Transform;
 	import flash.net.URLRequest;
+	import flash.text.TextField;
+	import flash.text.TextFormat;
 	
 	import flash.events.IOErrorEvent;
 	
 	import com.novabox.tamagochi.*;
 	import com.novabox.tamagochi.states.*;
 
-	[SWF(backgroundColor = "#FFFFFF", frameRate = "60", width = "300", height = "210")]
+	[SWF(backgroundColor = "#FFFFFF", frameRate = "60", width = "300", height = "250")]
 
 	public class Main extends Sprite 
 	{
 		public static const BAR_ORIGIN_Y:Number = 130;
-		public static const BAR_HEIGHT:Number = 10;
+		public static const BAR_HEIGHT:Number = 12;
 		public static const BAR_WIDTH:Number = 120;
+		
+		public var formatSimple:TextFormat = new TextFormat();
+		
 		
 		protected var tamagochi:Tamagochi;
 		
@@ -40,6 +45,12 @@
 		protected var boringBar:Sprite;
 		protected var lifeBar:Sprite;
 		
+		protected var hungerText:TextField;
+		protected var thirstText:TextField;
+		protected var tirednessText:TextField;
+		protected var illnessText:TextField;
+		protected var boringText:TextField;
+		protected var lifeText:TextField;
 		
 		public function Main():void 
 		{
@@ -60,9 +71,12 @@
 		
 		public function StartTamagochi(): void
 		{
-			
 			tamagochi = new Tamagochi();
 			SetupStates();
+			
+			formatSimple.font = "Calibri";
+			formatSimple.size = 10;
+			formatSimple.color = 0x000000;
 			
 			addChild(tamagochi.GetSprite());
 			addChild(tamagochi.GetGameSprite());
@@ -131,38 +145,74 @@
 		public function InitializeBars() : void
 		{
 			hungerBar = new Sprite();
+			
+			hungerText = new TextField();
+			hungerText.defaultTextFormat = formatSimple;
+			
 			addChild(hungerBar);
+			addChild(hungerText);
+			
 			hungerBar.y = BAR_ORIGIN_Y;
+			hungerText.y = BAR_ORIGIN_Y - 2;
+			hungerText.text = "faim : ";
+			
 			
 			thirstBar = new Sprite();
+			thirstText = new TextField();
+			thirstText.defaultTextFormat = formatSimple;
 			addChild(thirstBar);
+			addChild(thirstText);
 			thirstBar.y = hungerBar.y + BAR_HEIGHT;
+			thirstText.y = hungerText.y + BAR_HEIGHT;
+			thirstText.text = "soif : ";
 			
 			tirednessBar = new Sprite();
+			tirednessText = new TextField();
+			tirednessText.defaultTextFormat = formatSimple;
 			addChild(tirednessBar);
+			addChild(tirednessText);
 			tirednessBar.y = thirstBar.y + BAR_HEIGHT;
+			tirednessText.y = thirstText.y + BAR_HEIGHT;
+			tirednessText.text = "fatigue : ";
 			
-			illnessBar= new Sprite();
+			illnessBar = new Sprite();
+			illnessText = new TextField();
+			illnessText.defaultTextFormat = formatSimple;
 			addChild(illnessBar);
-			illnessBar.y = tirednessBar.y + BAR_HEIGHT;			
+			addChild(illnessText);
+			illnessBar.y = tirednessBar.y + BAR_HEIGHT;		
+			illnessText.y = tirednessText.y + BAR_HEIGHT;
+			illnessText.text = "Maladie : ";
 			
 			boringBar = new Sprite();
+			boringText = new TextField();
+			formatSimple.color = 0xc0c0c0;
+			boringText.defaultTextFormat = formatSimple;
 			addChild(boringBar);
+			addChild(boringText);
 			boringBar.y = illnessBar.y + BAR_HEIGHT;	
+			boringText.y = illnessText.y + BAR_HEIGHT;
+			boringText.text = "ennuie : ";
 			
 			lifeBar = new Sprite ();
+			lifeText = new TextField();
+			formatSimple.color = 0xc0c0c0;
+			lifeText.defaultTextFormat = formatSimple;
 			addChild(lifeBar);
-			lifeBar.y = boringBar.y + 3*BAR_HEIGHT;
+			addChild(lifeText);
+			lifeBar.y = boringBar.y + 3 * BAR_HEIGHT;
+			lifeText.y = boringText.y + 3 * BAR_HEIGHT;
+			lifeText.text = "vie : ";
 		}
 		
 		public function UpdateBars() : void
 		{
-			UpdateBar(hungerBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_HUNGER), 		0xFF9900);
-			UpdateBar(thirstBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_THIRST), 		0xAA0000);
-			UpdateBar(tirednessBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_TIREDNESS),	0xAAAAAA);
-			UpdateBar(illnessBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_ILLNESS),		0x00AA00);
-			UpdateBar(boringBar, tamagochi.GetFeelingValue(Tamagochi.FEELING_BORING),		0x0000AA);
-			UpdateBar(lifeBar, tamagochi.GetFeelingValue(Tamagochi.LIFE),		0x660000);
+			UpdateBar(hungerBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_HUNGER), 		0xFF9900);
+			UpdateBar(thirstBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_THIRST), 		0xAA0000);
+			UpdateBar(tirednessBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_TIREDNESS),		0xAAAAAA);
+			UpdateBar(illnessBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_ILLNESS),		0x00AA00);
+			UpdateBar(boringBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_BORING),		0x0000AA);
+			UpdateBar(lifeBar,		tamagochi.GetFeelingValue(Tamagochi.LIFE),					0x660000);
 		}
 		
 		public function UpdateBar(_bar:Sprite, _value:Number, _color:Number) : void
@@ -170,16 +220,32 @@
 			var barWidth:Number = BAR_WIDTH * _value;
 			_bar.graphics.clear();
 			_bar.graphics.beginFill(_color, 1);
-				_bar.graphics.drawRect(0, 0, barWidth, BAR_HEIGHT);
+			_bar.graphics.drawRect(0, 0, barWidth, BAR_HEIGHT);
 			_bar.graphics.endFill();			
 		}
 		
+		public function UpdateTexts() :void {
+			UpdateText(hungerText,		tamagochi.GetFeelingValue(Tamagochi.FEELING_HUNGER), "faim");
+			UpdateText(thirstText,		tamagochi.GetFeelingValue(Tamagochi.FEELING_THIRST), "soif");
+			UpdateText(tirednessText,	tamagochi.GetFeelingValue(Tamagochi.FEELING_TIREDNESS), "fatigue");
+			UpdateText(illnessText,		tamagochi.GetFeelingValue(Tamagochi.FEELING_ILLNESS), "maladie");
+			UpdateText(boringText,		tamagochi.GetFeelingValue(Tamagochi.FEELING_BORING), "ennui");
+			UpdateText(lifeText,		tamagochi.GetFeelingValue(Tamagochi.LIFE), "vie");
+		}
+		
+		public function UpdateText(_text:TextField, _value:Number, typevalue:String):void
+		{
+			_value = Math.round(_value * 100);
+			var pourcentageText:String = typevalue + " : " + _value + "%";
+			_text.text = pourcentageText;
+		}
 		
 		public function Update(_event:Event) : void
 		{
 			TimeManager.timeManager.Update();
 			tamagochi.Update();
 			UpdateBars();
+			UpdateTexts();
 		}
 	}
 	
