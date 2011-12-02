@@ -51,7 +51,7 @@ package com.novabox.tamagochi.game
 			
 			sprite.addChild(winnerText);
 			winnerText.x = 50;
-			winnerText.y = 160;
+			winnerText.y = 190;
 			
 			var rockImg:Loader = new Loader();
 			rockImg.load(new URLRequest("./images/rock.png"));
