@@ -19,6 +19,7 @@
 	import flash.net.URLRequest;
 	import flash.text.TextField;
 	import flash.text.TextFormat;
+	import flash.display.GradientType;
 	
 	import flash.events.IOErrorEvent;
 	
@@ -186,7 +187,7 @@
 			
 			boringBar = new Sprite();
 			boringText = new TextField();
-			formatSimple.color = 0xc0c0c0;
+			formatSimple.color = 0x000000;
 			boringText.defaultTextFormat = formatSimple;
 			addChild(boringBar);
 			addChild(boringText);
@@ -196,7 +197,7 @@
 			
 			lifeBar = new Sprite ();
 			lifeText = new TextField();
-			formatSimple.color = 0xc0c0c0;
+			formatSimple.color = 0x000000;
 			lifeText.defaultTextFormat = formatSimple;
 			addChild(lifeBar);
 			addChild(lifeText);
@@ -207,19 +208,20 @@
 		
 		public function UpdateBars() : void
 		{
-			UpdateBar(hungerBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_HUNGER), 		0xFF9900);
-			UpdateBar(thirstBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_THIRST), 		0xAA0000);
-			UpdateBar(tirednessBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_TIREDNESS),		0xAAAAAA);
-			UpdateBar(illnessBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_ILLNESS),		0x00AA00);
-			UpdateBar(boringBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_BORING),		0x0000AA);
-			UpdateBar(lifeBar,		tamagochi.GetFeelingValue(Tamagochi.LIFE),					0x660000);
+			UpdateBar(hungerBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_HUNGER), 		0xdf63a3a, 0x4e0a0a);
+			UpdateBar(thirstBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_THIRST), 		0x93a3d7, 0x0d0a4e);
+			UpdateBar(tirednessBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_TIREDNESS),		0xAAAAAA, 0x000000);
+			UpdateBar(illnessBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_ILLNESS),		0x7fbf76, 0x132a04);
+			UpdateBar(boringBar,	tamagochi.GetFeelingValue(Tamagochi.FEELING_BORING),		0x97e4f4, 0x118ea9);
+			UpdateBar(lifeBar,		tamagochi.GetFeelingValue(Tamagochi.LIFE),					0xeaae39, 0xdf5d0e);
 		}
 		
-		public function UpdateBar(_bar:Sprite, _value:Number, _color:Number) : void
+		public function UpdateBar(_bar:Sprite, _value:Number, _color:Number, _color2:Number) : void
 		{
 			var barWidth:Number = BAR_WIDTH * _value;
 			_bar.graphics.clear();
-			_bar.graphics.beginFill(_color, 1);
+			//_bar.graphics.beginFill(_color, 1);
+			_bar.graphics.beginGradientFill(GradientType.LINEAR, [_color, _color2], [1, 1], [0, 255]);
 			_bar.graphics.drawRect(0, 0, barWidth, BAR_HEIGHT);
 			_bar.graphics.endFill();			
 		}
