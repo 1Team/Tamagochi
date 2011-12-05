@@ -12,10 +12,12 @@ package com.novabox.tamagochi.game
 	import flash.utils.setInterval;
 	import flash.utils.Timer;
 	import flash.events.TimerEvent;
+	
 	/**
 	 * ...
 	 * @author Alex
 	 */
+	
 	public class ShiFuMiGame 
 	{
 		protected static var ROCK:Number = 0;
@@ -50,8 +52,8 @@ package com.novabox.tamagochi.game
 			winnerText.autoSize = TextFieldAutoSize.CENTER;
 			
 			sprite.addChild(winnerText);
-			winnerText.x = 50;
-			winnerText.y = 190;
+			winnerText.x = 200;
+			winnerText.y = 50;
 			
 			var rockImg:Loader = new Loader();
 			rockImg.load(new URLRequest("./images/rock.png"));

@@ -29,6 +29,7 @@ package com.novabox.tamagochi.states
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_BORING);
 					break;
 				default:
+					GetTamagochi().IncreaseFeeling(Tamagochi.LIFE);
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_HUNGER);
 					GetTamagochi().IncreaseFeeling(Tamagochi.FEELING_THIRST);
 					break;
